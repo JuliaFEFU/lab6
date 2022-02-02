@@ -1,0 +1,197 @@
+// Object declarations:
+//
+//    image: [name], [path to asset], [x], [y], [opacity 0.0 to 1.0]
+//
+//    animatedpath: [name], [path to asset], [spacing between images in pixels], [speed in pixels/sec], [opacity 0.0 to 1.0]
+//        [x1], [y1], [x2], [y2]
+//             ...
+//        [x1], [y1], [x2], [y2]
+//    end
+//
+//    imageicon: [name], [initial state], [x], [y], [opacity 0.0 to 1.0]
+//        [path to asset], [state]
+//                ....
+//        [path to asset], [state]
+//    end
+//
+//    label: [name], [text], [font size], [color], [alignment], [x], [y], [width], [height], [opacity 0.0 to 1.0]
+//
+//    attr: [key], [value]
+//        
+
+attr: redraw_interval, 100
+attr: data_update_interval, 500
+
+// Background image is drawn first
+image: background, thermalscreen/thermal_night_background.jpg, 0, 0, 1.0
+
+////////////////////////////////////////////////////////
+//                    POWER TRAIN                     //
+////////////////////////////////////////////////////////
+
+// These are the images used to construct the PT loop
+image: pt_main,            thermalscreen/thermal_pt_main.png,            139, 104, 1.0
+image: pt_radiator,        thermalscreen/thermal_pt_radiator.png,        139, 44,  1.0
+image: pt_radiator_bypass, thermalscreen/thermal_pt_radiator_bypass.png, 151, 104, 1.0
+
+// Animates the PT loop with black arrows
+animatedpath: ptLoopPath, thermalscreen/thermal_arrow_black_new.png, 0, 50, .5
+    843, 110,  843, 50
+    843, 50,   145, 50
+    145, 50,   145, 110
+    145, 110,  145, 902
+    145, 902,  494, 902
+    494, 902,  494, 1030
+    494, 1030, 145, 1030
+    145, 1030, 145, 1200
+    145, 1200, 843, 1200
+    843, 1200, 843, 110
+    331, 902,  331, 1030
+    843, 110,  145, 110
+end
+
+// Defines the radiator bypass icon for the power train loop
+imageicon: radiatorBypassValveIcon, unknown, 793, 60, 1.0
+    thermalscreen/thermal_night_pt_rad_bypass_0.png,      0
+    thermalscreen/thermal_night_pt_rad_bypass_50.png,     50
+    thermalscreen/thermal_night_pt_rad_bypass_100.png,    100
+    thermalscreen/thermal_night_pt_rad_bypass_unknown.png, unknown
+end
+
+////////////////////////////////////////////////////////
+//                      BATTERY                       //
+////////////////////////////////////////////////////////
+
+// These are the images used to construct the Battery loop for series mode
+image: battery_series_main,           thermalscreen/thermal_battery_series_main.png,           193, 418, 1.0
+image: battery_series_chiller_bypass, thermalscreen/thermal_battery_series_chiller_bypass.png, 573, 418, 1.0
+image: battery_series_chiller,        thermalscreen/thermal_battery_series_chiller.png,        557, 313, 1.0
+
+// These are the images used to construct the Battery loop for parallel mode
+image: battery_parallel_main,           thermalscreen/thermal_battery_parallel_main.png,           193, 418, 1.0
+image: battery_parallel_chiller_bypass, thermalscreen/thermal_battery_parallel_chiller_bypass.png, 573, 418, 1.0
+image: battery_parallel_chiller,        thermalscreen/thermal_battery_parallel_chiller.png,        559, 313, 1.0
+
+// Animates the battery loop with black arrows
+animatedpath: batteryLoopPath, thermalscreen/thermal_arrow_black_new.png, 0, 50, .5
+    200, 779, 200, 424
+    200, 424, 566, 424
+    566, 424, 638, 424
+    638, 319, 638, 424
+    638, 424, 638, 529
+    638, 529, 337, 529
+    337, 529, 337, 779
+    566, 424, 566, 319
+end
+
+imageicon: systemValveIcon, parallel, 82, 349, 1.0
+    thermalscreen/thermal_system_valve_parallel.png, parallel
+    thermalscreen/thermal_system_valve_series.png,   series
+    thermalscreen/thermal_system_valve_unknown.png,  unknown
+end
+
+imageicon: chillerBypassValveIcon, parallel_50, 515, 374, 1.0
+    thermalscreen/thermal_chiller_valve_parallel_0.png,   parallel_0
+    thermalscreen/thermal_chiller_valve_parallel_50.png,  parallel_50
+    thermalscreen/thermal_chiller_valve_parallel_100.png, parallel_100
+    thermalscreen/thermal_chiller_valve_series_0.png,     series_0
+    thermalscreen/thermal_chiller_valve_series_50.png,    series_50
+    thermalscreen/thermal_chiller_valve_series_100.png,   series_100
+    thermalscreen/thermal_chiller_valve_unknown.png,      unknown
+end
+
+imageicon: batteryHeaterIcon, off, 278, 589, 1.0
+    thermalscreen/thermal_battery_heater_off.png, off
+    thermalscreen/thermal_battery_heater_on.png,  on
+end
+
+////////////////////////////////////////////////////////
+//                      COOLANT                       //
+////////////////////////////////////////////////////////
+
+// These are the images used to construct the Coolant loop
+image: coolant_main,    thermalscreen/thermal_coolant_main.png,    194, 165, 1.0
+image: coolant_hvac,    thermalscreen/thermal_coolant_hvac.png,    488, 326, 1.0
+image: coolant_chiller, thermalscreen/thermal_coolant_chiller.png, 500, 314, 1.0
+
+animatedpath: coolantLoopPath, thermalscreen/thermal_arrow_black_new.png, 0, 50, .5
+    790, 321, 494, 321
+    494, 321, 200, 321
+    200, 321, 200, 171
+    200, 171, 790, 171
+    790, 171, 790, 321
+    790, 321, 790, 611
+    790, 611, 494, 611
+    494, 611, 494, 321
+end
+
+imageicon: chillerTXVIcon, open, 688, 281, 1.0
+    thermalscreen/thermal_txv_open.png,    open
+    thermalscreen/thermal_txv_closed.png,  closed
+    thermalscreen/thermal_txv_unknown.png, unknown
+end
+
+imageicon: hvacTXVIcon, open, 688, 572, 1.0
+    thermalscreen/thermal_txv_open.png,    open
+    thermalscreen/thermal_txv_closed.png,  closed
+    thermalscreen/thermal_txv_unknown.png, unknown
+end
+
+imageicon: louversLeftIcon, 50, 228, 124, 1.0
+    thermalscreen/thermal_louvers_0.png, 0
+    thermalscreen/thermal_louvers_left_50.png, 50
+    thermalscreen/thermal_louvers_100.png, 100
+end
+
+imageicon: louversRightIcon, 50, 624, 124, 1.0
+    thermalscreen/thermal_louvers_0.png, 0
+    thermalscreen/thermal_louvers_right_50.png, 50
+    thermalscreen/thermal_louvers_100.png, 100
+end
+
+imageicon: throatLeftIcon, 50, 390, 69, 1.0
+    thermalscreen/thermal_throat_0.png, 0
+    thermalscreen/thermal_throat_left_50.png, 50
+    thermalscreen/thermal_throat_100.png, 100
+end
+
+imageicon: throatRightIcon, 50, 580, 69, 1.0
+    thermalscreen/thermal_throat_0.png, 0
+    thermalscreen/thermal_throat_right_50.png, 50
+    thermalscreen/thermal_throat_100.png, 100
+end
+
+// Overlay other static objects
+image: overlay, thermalscreen/thermal_night_overlay.png, 0, 0, 1.0
+
+label: ambientRaw,                    --, 20, white, left,   871, 1341, 115, 30, 1.0
+label: ambientFiltered,               --, 20, white, left,   871, 1307, 115, 30, 1.0
+label: valvePct,                      --, 20, white, left,   215, 370,  115, 30, 1.0
+label: currentModeTxt,                --, 20, white, left,   180, 1309, 300, 30, 1.0
+label: desiredModeTxt,                --, 20, white, left,   500, 1309, 300, 30, 1.0
+label: radiatorOutlet,                --, 20, white, right,  10,  689,  115, 30, 1.0
+label: batteryInlet,                  --, 20, white, left,   357, 689,  115, 30, 1.0
+label: batteryMaxCell,                --, 20, white, left,   690, 800,  115, 30, 1.0
+label: batteryMinCell,                --, 20, white, left,   690, 827,  115, 30, 1.0
+label: batteryPassiveCoolTarget,      --, 20, white, left,   395, 800,  115, 30, 1.0
+label: batteryActiveCoolTarget,       --, 20, white, left,   395, 827,  115, 30, 1.0
+label: batteryActiveHeatTarget,       --, 20, white, left,   395, 854,  115, 30, 1.0
+label: refrigerantSuctionPressure,    --, 20, white, left,   435, 245,  115, 30, 1.0
+label: refrigerantSuctionTemp,        --, 20, white, left,   435, 279,  115, 30, 1.0
+label: refrigerantDischargePressure,  --, 20, white, left,   215, 245,  115, 30, 1.0
+label: refrigerantDischargeTemp,      --, 20, white, left,   215, 279,  115, 30, 1.0
+label: charger1magnetics,             --, 20, white, center, 116, 970,  115, 30, 1.0
+label: charger1heatsink,              --, 20, white, center, 116, 934,  115, 30, 1.0
+label: statorMaxTemp,                 --, 20, red,   right,  315, 1088, 115, 30, 1.0
+label: statorTemp,                    --, 20, white, left,   206, 1088, 115, 30, 1.0
+label: driveInverterIGBTMax,          --, 20, red,   right,  664, 1088, 115, 30, 1.0
+label: driveInverterIGBT,             --, 20, white, left,   555, 1088, 115, 30, 1.0
+label: driveInverterPCBMax,           --, 20, red,   right,  664, 1242, 115, 30, 1.0
+label: driveInverterPCB,              --, 20, black, left,   555, 1242, 115, 30, 1.0
+label: powerTrainPump,                --, 20, white, right,  0,   547,  115, 30, 1.0
+label: batteryPump,                   --, 20, white, center, 307, 456,  115, 30, 1.0
+label: radiatorBypassValve,           --, 20, white, left,   890, 92,   115, 30, 1.0
+label: chillerBypassValve,            --, 20, white, center, 508, 476,  115, 30, 1.0
+label: eac,                           --, 20, white, center, 307, 348,  115, 30, 1.0
+label: leftRadiatorFan,               --, 20, white, left,   377, 190,  115, 30, 1.0
+label: rightRadiatorFan,              --, 20, white, right,  498, 190,  115, 30, 1.0

@@ -1,0 +1,32 @@
+{
+  "0" :  {
+    "Name" : "HVAC Off",
+     "DataValues" :  {
+      "GUI_hvacOnRequest" : "false"
+    }
+  },
+   "1" :  {
+    "Name" : "Audio Off",
+     "DataValues" :  {
+      "GUI_audioVolume" : "0.000"
+    },
+     "OverrideDataValues" :  {
+      "GUI_muteAudioRequest" : "true"
+    }
+  },
+   "2" :  {
+    "Name" : "Doors Closed",
+     "DataValues" :  {
+      "DOOR_frontPassengerLatch" : "Closed",
+       "DOOR_frontDriverLatch" : "Closed",
+       "DOOR_rearPassengerLatch" : "Closed",
+       "DOOR_rearDriverLatch" : "Closed"
+    }
+  },
+    "3" :  {
+    "Name" : "Side Mirror Unfolded",
+     "DataValues" :  {
+      "VAPI_mirrorFoldState" : "Unfolded"
+    }
+  }
+}
